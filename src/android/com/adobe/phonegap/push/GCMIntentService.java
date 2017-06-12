@@ -370,23 +370,27 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         SharedPreferences prefs = context.getSharedPreferences(PushPlugin.COM_ADOBE_PHONEGAP_PUSH, Context.MODE_PRIVATE);
         String localIcon = prefs.getString(ICON, null);
         String localIconColor = prefs.getString(ICON_COLOR, null);
-        boolean soundOption = prefs.getBoolean(SOUND, true);
-        boolean vibrateOption = prefs.getBoolean(VIBRATE, true);
+        //boolean soundOption = prefs.getBoolean(SOUND, true);
+        //boolean vibrateOption = prefs.getBoolean(VIBRATE, true);
         Log.d(LOG_TAG, "stored icon=" + localIcon);
         Log.d(LOG_TAG, "stored iconColor=" + localIconColor);
+        //Log.d(LOG_TAG, "stored sound=" + soundOption);
+        //Log.d(LOG_TAG, "stored vibrate=" + vibrateOption);
+
+        SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean vibrateOption = app_preferences.getBoolean("com.adobe.phonegap.push.vibration", true);
+        boolean soundOption = app_preferences.getBoolean("com.adobe.phonegap.push.sound", true);
+        boolean lightOption = app_preferences.getBoolean("com.adobe.phonegap.push.light", true);
+        String ringtonePath = app_preferences.getString("com.adobe.phonegap.push.ringtone", "defValue");
         Log.d(LOG_TAG, "stored sound=" + soundOption);
         Log.d(LOG_TAG, "stored vibrate=" + vibrateOption);
 
+        /*
+         * Notification Light
+         */
 
-        //COODDDDEEEE HEEEEERE
-        SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String ringtonePath = app_preferences.getString("com.adobe.phonegap.push.ringtone", "defValue");
-        
-        Uri uri = Uri.parse(ringtonePath);
-        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), uri);
-        r.play();
-        mBuilder.setSound(null);
-        //COOOOODEEEEEE HEEEEERE
+        setNotificationLight(extras, lightOption, mBuilder);
+
         /*
          * Notification Vibration
          */
@@ -433,8 +437,8 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         /*
          * Notification Sound
          */
-        //if (soundOption) {
-        //    setNotificationSound(context, extras, mBuilder);
+        if (soundOption) {
+            setNotificationSound(ringtonePath, mBuilder);
         //}
 
         /*
@@ -585,6 +589,12 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         }
     }
 
+    private void setNotificationLight(Bundle extras, Boolean lightOption, NotificationCompat.Builder mBuilder) {
+        if (lightOption) {
+            mBuilder.setDefaults(Notification.DEFAULT_LIGHTS);
+        }
+    }
+
     private void setNotificationVibration(Bundle extras, Boolean vibrateOption, NotificationCompat.Builder mBuilder) {
         String vibrationPattern = extras.getString(VIBRATION_PATTERN);
         if (vibrationPattern != null) {
@@ -676,7 +686,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         }
     }
 
-    private void setNotificationSound(Context context, Bundle extras, NotificationCompat.Builder mBuilder) {
+    /*private void setNotificationSound(Context context, Bundle extras, NotificationCompat.Builder mBuilder) {
         String soundname = extras.getString(SOUNDNAME);
         if (soundname == null) {
             soundname = extras.getString(SOUND);
@@ -690,7 +700,12 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
             mBuilder.setSound(sound);
         } else {
             mBuilder.setSound(android.provider.Settings.System.DEFAULT_NOTIFICATION_URI);
-        }
+        }*/
+    private void setNotificationSound(String ringtonePath, NotificationCompat.Builder mBuilder) {
+        Uri uri = Uri.parse(ringtonePath);
+        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), uri);
+        r.play();
+        mBuilder.setSound(null);
     }
 
     private void setNotificationLedColor(Bundle extras, NotificationCompat.Builder mBuilder) {

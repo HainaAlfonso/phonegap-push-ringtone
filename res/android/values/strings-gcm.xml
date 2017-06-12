@@ -10,6 +10,6 @@
     <string name="gcm_settings_sound">Sound</string>
     <string name="gcm_settings_sound_on">Sound is switched on</string>
     <string name="gcm_settings_sound_off">Sound is switched off</string>
-    <string name="gcm_settings_ringtone_title">Ring tone</string>
+    <string name="gcm_settings_ringtone_title">Ringtone</string>
     <string name="gcm_settings_ringtone_summary">Choose a ring tone</string>
 </resources>
