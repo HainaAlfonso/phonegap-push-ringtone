@@ -35,6 +35,7 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
 
     public static final String LOG_TAG = "Push_Plugin";
 
+    private static final int RESULT_PUSH_SETTINGS = 1;
     private static CallbackContext pushContext;
     private static CordovaWebView gWebView;
     private static List<Bundle> gCachedExtras = Collections.synchronizedList(new ArrayList<Bundle>());
