@@ -79,4 +79,7 @@ public interface PushConstants {
     public static final String IMAGE_TYPE_SQUARE = "square";
     public static final String IMAGE_TYPE_CIRCLE = "circle";
     public static final String SUBJECT = "subject";
+    public static final String GET_PUSH_SETTINGS = "getPushSettings";
+    public static final String SHOW_PUSH_SETTINGS = "showPushSettings";
+    private static final int RESULT_PUSH_SETTINGS = 1;
 }

@@ -1,10 +1,14 @@
 package com.adobe.phonegap.push;
 
 import android.app.NotificationManager;
+import android.app.Notification;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences.Editor;
 
 import com.google.android.gms.gcm.GcmPubSub;
 import com.google.android.gms.iid.InstanceID;
@@ -240,6 +244,11 @@ public class PushPlugin extends CordovaPlugin implements PushConstants {
                     }
                 }
             });
+        } else if (SHOW_PUSH_SETTINGS.equals(action)){
+            Log.v(LOG_TAG, "execute ringtone chooser");
+            Intent i = new Intent(this.cordova.getActivity(), PushSettingsActivity.class);
+            this.cordova.getActivity().startActivityForResult(i, RESULT_PUSH_SETTINGS);
+            callbackContext.success();
         } else {
             Log.e(LOG_TAG, "Invalid action : " + action);
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.INVALID_ACTION));

@@ -1,9 +1,13 @@
 package com.adobe.phonegap.push;
 
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.preference.PreferenceManager;
+import android.content.SharedPreferences;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -420,7 +424,18 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
          * Notification Sound
          */
         if (soundOption) {
-            setNotificationSound(context, extras, mBuilder);
+            //setNotificationSound(context, extras, mBuilder);
+            SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            String ringtonePath = app_preferences.getString(SOUND_RINGTONE, "default ringtone");
+            if(!ringtonePath.equals(""))
+            {
+                Uri uri = Uri.parse(ringtonePath);
+                Log.v(LOG_TAG, "Playing Sound:" + uri.toString());
+                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), uri);
+                r.play();
+            }
+
+            mBuilder.setSound(null);
         }
 
         /*
