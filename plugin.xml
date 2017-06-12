@@ -66,6 +66,7 @@
 		<framework src="com.android.support:support-v13:23+"/>
 		<framework src="com.google.android.gms:play-services-gcm:10.2+"/>
 		<framework src="me.leolin:ShortcutBadger:1.1.14@aar"/>
+		<source-file src="src/android/com/adobe/phonegap/push/PushSettingsActivity.java" target-dir="src/android/com/adobe/phonegap/push/" />
 		<source-file src="src/android/com/adobe/phonegap/push/GCMIntentService.java" target-dir="src/com/adobe/phonegap/push/"/>
 		<source-file src="src/android/com/adobe/phonegap/push/PushConstants.java" target-dir="src/com/adobe/phonegap/push/"/>
 		<source-file src="src/android/com/adobe/phonegap/push/PushHandlerActivity.java" target-dir="src/com/adobe/phonegap/push/"/>
@@ -74,7 +75,6 @@
 		<source-file src="src/android/com/adobe/phonegap/push/RegistrationIntentService.java" target-dir="src/com/adobe/phonegap/push/"/>
 		<source-file src="src/android/com/adobe/phonegap/push/PermissionUtils.java" target-dir="src/com/adobe/phonegap/push/"/>
 		<source-file src="src/android/com/adobe/phonegap/push/BackgroundActionButtonHandler.java" target-dir="src/com/adobe/phonegap/push/"/>
-		<source-file src="src/android/com/adobe/phonegap/push/PushSettingsActivity.java" target-dir="src/android/com/adobe/phonegap/push/" />
 		<source-file src="res/android/xml/pushsettings.xml" target-dir="res/xml/" />
 		<source-file src="res/android/values/strings-gcm.xml" target-dir="res/values/" />
 	</platform>

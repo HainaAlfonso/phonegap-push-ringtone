@@ -1,4 +1,4 @@
-package com.plugin.gcm;
+package com.adobe.phonegap.push;
 
 import net.secure.com.R;
 import android.os.Bundle;
