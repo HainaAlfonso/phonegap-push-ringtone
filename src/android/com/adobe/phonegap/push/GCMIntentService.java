@@ -424,8 +424,8 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
          * Notification Sound
          */
         if (soundOption) {
-            //setNotificationSound(context, extras, mBuilder);
-            SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            setNotificationSound(context, extras, mBuilder);
+            /*SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
             String ringtonePath = app_preferences.getString(SOUND_RINGTONE, "default ringtone");
             if(!ringtonePath.equals(""))
             {
@@ -435,7 +435,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
                 r.play();
             }
 
-            mBuilder.setSound(null);
+            mBuilder.setSound(null);*/
         }
 
         /*
