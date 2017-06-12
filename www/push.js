@@ -295,31 +295,6 @@ PushNotification.prototype.finish = function(successCallback, errorCallback, id)
  * Push Notification Plugin.
  */
 
-PushNotification.prototype.showPushSettings = function (successCallback, errorCallback) {
-    if (errorCallback == null) {
-        errorCallback = function () {
-        }
-    }
-
-    if (successCallback == null) {
-        successCallback = function () {
-        }
-    }
-
-    if (typeof errorCallback != "function") {
-        console.log("PushNotification.showPushSettings failure: failure parameter not a function");
-        return
-    }
-
-    if (typeof successCallback != "function") {
-        console.log("PushNotification.showPushSettings failure: success callback parameter must be a function");
-        return
-    }
-
-    exec(successCallback, errorCallback, "PushNotification", "showPushSettings", []);
-};
-
-
 module.exports = {
     /**
      * Register for Push Notifications.
@@ -337,6 +312,10 @@ module.exports = {
 
     hasPermission: function(successCallback, errorCallback) {
         exec(successCallback, errorCallback, 'PushNotification', 'hasPermission', []);
+    },
+
+    showPushSettings: function(successCallback, errorCallback) {
+        exec(successCallback, errorCallback, "PushNotification", "showPushSettings", []);
     },
     /**
      * PushNotification Object.
