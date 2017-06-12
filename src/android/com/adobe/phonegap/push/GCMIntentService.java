@@ -439,7 +439,7 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
          */
         if (soundOption) {
             setNotificationSound(ringtonePath, mBuilder);
-        //}
+        }
 
         /*
          *  LED Notification
