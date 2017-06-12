@@ -382,19 +382,10 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
         String ringtonePath = app_preferences.getString("com.adobe.phonegap.push.ringtone", "defValue");
         
-        NotificationCompat.Builder mBuilder2 =
-            new NotificationCompat.Builder(context)
-                .setDefaults(defaults)
-                .setSmallIcon(context.getApplicationInfo().icon)
-                .setWhen(System.currentTimeMillis())
-                .setContentTitle(extras.getString("title"))
-                .setTicker(extras.getString("title"))
-                .setContentIntent(contentIntent)
-                .setAutoCancel(true);
         Uri uri = Uri.parse(ringtonePath);
         Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), uri);
         r.play();
-        mBuilder2.setSound(null);
+        mBuilder.setSound(null);
         //COOOOODEEEEEE HEEEEERE
         /*
          * Notification Vibration
