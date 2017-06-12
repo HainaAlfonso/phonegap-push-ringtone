@@ -377,6 +377,25 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         Log.d(LOG_TAG, "stored sound=" + soundOption);
         Log.d(LOG_TAG, "stored vibrate=" + vibrateOption);
 
+
+        //COODDDDEEEE HEEEEERE
+        SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String ringtonePath = app_preferences.getString("com.adobe.phonegap.push.ringtone", "defValue")
+        
+        NotificationCompat.Builder mBuilder2 =
+            new NotificationCompat.Builder(context)
+                .setDefaults(defaults)
+                .setSmallIcon(context.getApplicationInfo().icon)
+                .setWhen(System.currentTimeMillis())
+                .setContentTitle(extras.getString("title"))
+                .setTicker(extras.getString("title"))
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true);
+        Uri uri = Uri.parse(ringtonePath);
+        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), uri);
+        r.play();
+        mBuilder2.setSound(null);
+        //COOOOODEEEEEE HEEEEERE
         /*
          * Notification Vibration
          */
@@ -423,20 +442,9 @@ public class GCMIntentService extends GcmListenerService implements PushConstant
         /*
          * Notification Sound
          */
-        if (soundOption) {
-            setNotificationSound(context, extras, mBuilder);
-            /*SharedPreferences app_preferences = PreferenceManager.getDefaultSharedPreferences(this);
-            String ringtonePath = app_preferences.getString(SOUND_RINGTONE, "default ringtone");
-            if(!ringtonePath.equals(""))
-            {
-                Uri uri = Uri.parse(ringtonePath);
-                Log.v(LOG_TAG, "Playing Sound:" + uri.toString());
-                Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), uri);
-                r.play();
-            }
-
-            mBuilder.setSound(null);*/
-        }
+        //if (soundOption) {
+        //    setNotificationSound(context, extras, mBuilder);
+        //}
 
         /*
          *  LED Notification
